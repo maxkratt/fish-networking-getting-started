@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3053899566164311754}
   - component: {fileID: 9173544406159874266}
   - component: {fileID: 802571228203939527}
-  - component: {fileID: 8648064343286724471}
   - component: {fileID: -4628151545021553965}
   - component: {fileID: 7565052325175125800}
+  - component: {fileID: -9067703861326494492}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -131,7 +131,8 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 8648064343286724471}
+  - {fileID: 0}
+  - {fileID: 7565052325175125800}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -165,21 +166,6 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 0.5, y: 0.5, z: 0.5}
     IsValid: 1
---- !u!114 &8648064343286724471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7312781832305315786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 802571228203939527}
-  _networkObjectCache: {fileID: 802571228203939527}
 --- !u!54 &-4628151545021553965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,7 +205,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89443b0a084e81e49867232c0fd56ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 802571228203939527}
+  _networkObjectCache: {fileID: 802571228203939527}
+  secondsBeforeDespawn: 3
+--- !u!114 &-9067703861326494492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312781832305315786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c04bfaa01aa73140a7f46bb34a77017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 802571228203939527}
   _networkObjectCache: {fileID: 0}
-  secondsBeforeDespawn: 3

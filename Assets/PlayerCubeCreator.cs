@@ -20,6 +20,9 @@ public class PlayerCubeCreator : NetworkBehaviour
     private void SpawnCube()
     {
         NetworkObject obj = Instantiate(cubePrefab, transform.position, Quaternion.identity);
+
+        obj.GetComponent<SyncMaterialColor>().color.Value = Random.ColorHSV();
+
         Spawn(obj); // NetworkBehaviour shortcut for ServerManager.Spawn(obj);
     }
 }
