@@ -1,27 +1,16 @@
-using FishNet.Connection;
 using FishNet.Object;
+using Unity.Cinemachine;
 using UnityEngine;
 
-// This script will be a NetworkBehaviour so that we can use the 
-// OnOwnershipClient override.
+// This script will be a NetworkBehaviour so that we can use the OnStartClient override.
 public class PlayerCamera : NetworkBehaviour
 {
-    [SerializeField] private Transform cameraHolder;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
 
-    // This method is called on the client after gaining or losing ownership of the object.
-    // We could have used OnStartClient instead, as we did in the previous example, but using OnOwnershipClient
-    // means this will work for a player object we don't initially own but are given ownership to later.
-    public override void OnOwnershipClient(NetworkConnection prevOwner)
+    // This method is called on the client after the object is spawned in.
+    public override void OnStartClient()
     {
-        if (Camera.main == null)
-            return;
-
-        // If we are the new owner of this object, then take control of the camera by parenting it
-        // and moving it to our camera holder.
-        if (IsOwner)
-        {
-            Camera.main.transform.SetPositionAndRotation(cameraHolder.position, cameraHolder.rotation);
-            Camera.main.transform.SetParent(cameraHolder);
-        }
+        // Simply enable our local cinemachine camera on the object if we are the owner.
+        cinemachineCamera.enabled = IsOwner;
     }
 }
