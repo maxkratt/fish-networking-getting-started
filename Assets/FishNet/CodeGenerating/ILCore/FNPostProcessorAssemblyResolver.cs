@@ -8,21 +8,20 @@ using Unity.CompilationPipeline.Common.ILPostProcessing;
 
 namespace FishNet.CodeGenerating
 {
-    internal class PostProcessorAssemblyResolver : IAssemblyResolver
+    internal class FNPostProcessorAssemblyResolver : IAssemblyResolver
     {
         private readonly string[] m_AssemblyReferences;
         private readonly Dictionary<string, AssemblyDefinition> m_AssemblyCache = new();
         private readonly ICompiledAssembly m_CompiledAssembly;
         private AssemblyDefinition m_SelfAssembly;
 
-        public PostProcessorAssemblyResolver(ICompiledAssembly compiledAssembly)
+        public FNPostProcessorAssemblyResolver(ICompiledAssembly compiledAssembly)
         {
             m_CompiledAssembly = compiledAssembly;
             m_AssemblyReferences = compiledAssembly.References;
         }
 
         public void Dispose() { }
-
         public AssemblyDefinition Resolve(AssemblyNameReference name) => Resolve(name, new(ReadingMode.Deferred));
 
         public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
@@ -78,18 +77,14 @@ namespace FishNet.CodeGenerating
                 return fileName;
             }
 
-            //Unfortunately the current ICompiledAssembly API only provides direct references.
-            //It is very much possible that a postprocessor ends up investigating a type in a directly
+            // Unfortunately the current ICompiledAssembly API only provides direct references.
+            // It is very much possible that a postprocessor ends up investigating a type in a directly
             //referenced assembly, that contains a field that is not in a directly referenced assembly.
             //if we don't do anything special for that situation, it will fail to resolve.  We should fix this
             //in the ILPostProcessing API. As a workaround, we rely on the fact here that the indirect references
             //are always located next to direct references, so we search in all directories of direct references we
             //got passed, and if we find the file in there, we resolve to it.
-            return m_AssemblyReferences
-                .Select(Path.GetDirectoryName)
-                .Distinct()
-                .Select(parentDir => Path.Combine(parentDir, $"{name.Name}.dll"))
-                .FirstOrDefault(File.Exists);
+            return m_AssemblyReferences.Select(Path.GetDirectoryName).Distinct().Select(parentDir => Path.Combine(parentDir, $"{name.Name}.dll")).FirstOrDefault(File.Exists);
         }
 
         private static MemoryStream MemoryStreamFor(string fileName)
