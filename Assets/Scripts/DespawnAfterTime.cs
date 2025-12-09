@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DespawnAfterTime : NetworkBehaviour
 {
-    public float secondsBeforeDespawn = 3f;
+    public float SecondsBeforeDespawn = 3f;
 
     public override void OnStartServer()
     {
@@ -13,7 +13,7 @@ public class DespawnAfterTime : NetworkBehaviour
 
     private IEnumerator DespawnAfterSeconds()
     {
-        yield return new WaitForSeconds(secondsBeforeDespawn);
+        yield return new WaitForSeconds(SecondsBeforeDespawn);
 
         Despawn(); // NetworkBehaviour shortcut for ServerManager.Despawn(gameObject);
     }
