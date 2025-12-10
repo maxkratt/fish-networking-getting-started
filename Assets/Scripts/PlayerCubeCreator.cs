@@ -1,20 +1,17 @@
 using FishNet.Object;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerCubeCreator : NetworkBehaviour
 {
     public NetworkObject CubePrefab;
 
-    public override void OnStartClient()
+    void Update()
     {
-        if (IsOwner)
-            GetComponent<PlayerInput>().enabled = true;
-    }
+        // Only the local player object should perform these actions.
+        if (!IsOwner)
+            return;
 
-    public void OnAttack(InputValue value)
-    {
-        if (value.isPressed)
+        if (Input.GetButtonDown("Fire1"))
             SpawnCube();
     }
 
@@ -23,6 +20,7 @@ public class PlayerCubeCreator : NetworkBehaviour
     private void SpawnCube()
     {
         NetworkObject obj = Instantiate(CubePrefab, transform.position, Quaternion.identity);
+        obj.GetComponent<SyncMaterialColor>().Color.Value = Random.ColorHSV();
         Spawn(obj); // NetworkBehaviour shortcut for ServerManager.Spawn(obj);
     }
 }

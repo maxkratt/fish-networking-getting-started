@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6613212556287043484}
   - component: {fileID: -3768823118269001135}
   - component: {fileID: 487566605513932989}
+  - component: {fileID: -5973255743734269592}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -208,3 +209,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89443b0a084e81e49867232c0fd56ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6613212556287043484}
+  _networkObjectCache: {fileID: 0}
+  SecondsBeforeDespawn: 3
+--- !u!114 &-5973255743734269592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519794578228329297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48b2267f3622214b9cac2eebd4248db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SyncMaterialColor
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6613212556287043484}
+  _networkObjectCache: {fileID: 0}
